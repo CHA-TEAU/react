@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="input">
+        <input type="text" id="name">
+        <button id="btn">Вывод</button>
+    </div>
+    
+
+    <div id="app">
+
+
+    </div>
+
+
+
+    <script type="text/babel">
+
+        
+        let get = document.getElementById("btn");
+
+        get.addEventListener("click", ()=>{
+            let pokename = document.getElementById("name").value;
+            let dom = ReactDOM.createRoot(document.getElementById("app"));
+            fetch("https://pokeapi.co/api/v2/pokemon/" + pokename)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                dom.render(<div>{data.name}</div>)
+                dom.render(<img src={data.sprites['front_default']} width="300px"></img>)
+            })
+        })
+
+        
+    </script>
+</body>
+
+</html>
